@@ -16,7 +16,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     theatre_address: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     }
   });
 

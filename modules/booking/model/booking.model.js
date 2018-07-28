@@ -6,7 +6,7 @@ export default (sequelize, DataTypes) => {
       autoIncrement: true
     },
     user_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
       // FK
     },
     booking_date: {

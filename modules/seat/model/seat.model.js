@@ -6,7 +6,7 @@ export default (sequelize, DataTypes) => {
       autoIncrement: true
     },
     show_id: {
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
       // FK
     },
     seat_status: {

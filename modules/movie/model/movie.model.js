@@ -9,7 +9,7 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     movie_description: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     }
   });
 
