@@ -1,17 +1,11 @@
-export default (sequelize, DataTypes) => {
-  const Movie = sequelize.define("movie", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    movie_name: {
-      type: DataTypes.STRING
-    },
-    movie_description: {
-      type: DataTypes.TEXT
-    }
-  });
+import mongoose from "mongoose";
 
-  return Movie;
-};
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+
+const MovieSchema = new Schema({
+  movie_name: String,
+  movie_description: String
+});
+
+export default mongoose.model("Movie", MovieSchema);

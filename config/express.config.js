@@ -1,4 +1,5 @@
 import bodyParser from "body-parser";
+import expressValidator from "express-validator";
 
 export default (app, config, path, env) => {
   app.set("port", config.app.port);
@@ -8,4 +9,5 @@ export default (app, config, path, env) => {
       extended: false
     })
   );
+  app.use(expressValidator());
 };
