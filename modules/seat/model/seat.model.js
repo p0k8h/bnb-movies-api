@@ -1,26 +1,25 @@
-export default (sequelize, DataTypes) => {
-  const Seat = sequelize.define("seat", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    show_id: {
-      type: DataTypes.INTEGER
-      // FK
-    },
-    seat_status: {
-      type: DataTypes.ENUM,
-      values: ["Booked", "Available"]
-    },
-    booking_id: {
-      type: DataTypes.INTEGER
-      // FK
-    },
-    theatre_id: {
-      type: DataTypes.INTEGER
-      // FK
-    }
-  });
-  return Seat;
-};
+import mongoose from "mongoose";
+
+const Schema = mongoose.Schema;
+const ObjectId = Schema.ObjectId;
+
+const SeatSchema = new Schema({
+  show_id: {
+    type: ObjectId,
+    ref: "Show"
+  },
+  booking_id: {
+    type: ObjectId,
+    ref: "Booking"
+  },
+  theatre_id: {
+    type: ObjectId,
+    ref: "Theatre"
+  },
+  seat_status: {
+    type: String,
+    enum: ["Booked", "Available"]
+  }
+});
+
+export default mongoose.model("Seat", SeatSchema);
