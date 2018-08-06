@@ -40,4 +40,38 @@ const ShowSchema = new Schema({
   passwordResetExpires: Number
 });
 
+/**
+ * Password hash middleware.
+ */
+userSchema.pre("save", function save(next) {
+  const user = this;
+  if (!user.isModified("password")) {
+    return next();
+  }
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) {
+      return next(err);
+    }
+    bcrypt.hash(user.password, salt, null, (err, hash) => {
+      if (err) {
+        return next(err);
+      }
+      user.password = hash;
+      next();
+    });
+  });
+});
+
+/**
+ * Helper method for validating user's password.
+ */
+userSchema.methods.verifyPassword = function verifyPassword(
+  candidatePassword,
+  cb
+) {
+  bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+    cb(err, isMatch);
+  });
+};
+
 export default mongoose.model("Show", ShowSchema);
