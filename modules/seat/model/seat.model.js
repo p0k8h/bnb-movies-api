@@ -4,17 +4,8 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const SeatSchema = new Schema({
-  show_id: {
-    type: ObjectId,
-    ref: "Show"
-  },
-  booking_id: {
-    type: ObjectId,
-    ref: "Booking"
-  },
-  theatre_id: {
-    type: ObjectId,
-    ref: "Theatre"
+  seat_no: {
+    type: String
   },
   seat_status: {
     type: String,

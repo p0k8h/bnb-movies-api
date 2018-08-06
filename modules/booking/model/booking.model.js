@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const BookingSchema = new Schema({
-  user_id: {
+  userID: {
     type: ObjectId,
     ref: "User"
   },
-  booking_date: Date,
-  show_id: {
+  showID: {
     type: ObjectId,
     ref: "Show"
-  }
+  },
+  booking_date: Date
 });
 
-export default mongoose.model("Movie", BookingSchema);
+export default mongoose.model("Booking", BookingSchema);

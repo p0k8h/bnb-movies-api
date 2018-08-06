@@ -9,6 +9,10 @@ const TheatreSchema = new Schema({
   },
   theatre_address: {
     type: String
+  },
+  movieID: {
+    type: ObjectId,
+    ref: "Movie"
   }
 });
 

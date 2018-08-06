@@ -4,10 +4,21 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const MovieSchema = new Schema({
-  movie_name: String,
-  movie_description: String,
+  theatreID: {
+    type: ObjectId,
+    ref: "Theatre"
+  },
+  movie_name: {
+    type: String,
+    required: true
+  },
+  movie_description: {
+    type: String,
+    required: true
+  },
   movie_release_date: {
-    type: Date
+    type: Date,
+    required: true
   }
 });
 
