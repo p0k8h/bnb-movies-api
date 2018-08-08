@@ -1,15 +1,18 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 
-const config = require("./config");
+import monggoseConfig from "./config/mongoose.config";
+import expressConfig from "./config/express.config";
+import config from "./config";
+
 const env = process.env.NODE_ENV || "dev";
 
 const app = express();
 app.use(cors());
 
-require("./config/mongoose.config")(config);
-
-require("./config/express.config")(app, config, path, env);
+monggoseConfig(config);
+expressConfig(app, config, path, env);
 
 app.listen(3000, () => {
   console.log("server listeniong");
