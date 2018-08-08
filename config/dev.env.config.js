@@ -11,16 +11,13 @@ const app = {
   baseURL: "/api/v1"
 };
 
-const DB_NAME = 'bnb-movies'
+const DB_NAME = "bnb-movies";
 
 const mongodb = {
-    MONGODB_URI = `mongodb://localhost${DB_NAME}`,
-    options: {
-        useMongoClient: true
-    }
-}
+  MONGODB_URI: `mongodb://localhost:27017/${DB_NAME}`,
+  options: {
+    useNewUrlParser: true
+  }
+};
 
-export {
-    app,
-    mongodb
-}
+export { app, mongodb };
