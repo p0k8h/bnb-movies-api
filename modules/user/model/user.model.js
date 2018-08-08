@@ -5,10 +5,12 @@ const ObjectId = Schema.ObjectId;
 
 const ShowSchema = new Schema({
   first_name: {
-    type: String
+    type: String,
+    required: true
   },
   last_name: {
-    type: String
+    type: String,
+    required: true
   },
   email: {
     type: String,
@@ -22,7 +24,8 @@ const ShowSchema = new Schema({
     select: false
   },
   phone: {
-    type: Number
+    type: Number,
+    required: true
   },
   address: {
     type: String
