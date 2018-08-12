@@ -34,6 +34,28 @@ export function signupUser(params) {
   });
 }
 
+export function getUserByID(params) {
+  return new Promise(function(resolve, reject) {
+    UserModel.findById(params.userID)
+      .then(function(user) {
+        if (user) {
+          return resolve({
+            data: user
+          });
+        } else {
+          return resolve({
+            message: "User not found!"
+          });
+        }
+      })
+      .catch(function(err) {
+        reject({
+          message: err
+        });
+      });
+  });
+}
+
 export function updateUser(params) {
   return new Promise(function(resolve, reject) {
     UserModel.findByIdAndUpdate(params._id, { $set: params }, { new: true })

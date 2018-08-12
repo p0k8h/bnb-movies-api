@@ -2,6 +2,7 @@ import _ from "lodash";
 import {
   signupUser,
   updateUser,
+  getUserByID,
   updatePassword,
   forgotPassword,
   resetPassword
@@ -34,6 +35,23 @@ export function updateUser(req, res, next) {
   ]);
 
   updateUser(userParams)
+    .then(function(response) {
+      res.send(response);
+    })
+    .catch(function(err) {
+      res.status(400).send(err);
+    });
+}
+
+export function updateUser(req, res, next) {
+
+  let userID = req.user._id;
+
+  let userParams = _.assign(_.pick(req.body, [
+
+  ]), { userID })
+
+  getUserByID(userParams)
     .then(function(response) {
       res.send(response);
     })
