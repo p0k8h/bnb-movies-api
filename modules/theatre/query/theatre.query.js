@@ -1,6 +1,6 @@
 import TheatreModel from "../model/theatre.model";
 
-export function getTheatres(params) {
+export function getTheatres(params = {}) {
   return new Promise(function(resolve, reject) {
     TheatreModel.find(params)
       .then(function(theatres) {
@@ -16,9 +16,9 @@ export function getTheatres(params) {
   });
 }
 
-export function getTheatreByID(params) {
+export function getTheatreByID(theatreID) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.findById(params.theatreID)
+    TheatreModel.findById(theatreID)
       .then(function(theatre) {
         resolve({
           data: theatre
@@ -50,13 +50,9 @@ export function postTheatre(params) {
   });
 }
 
-export function updateTheatreByID(params) {
+export function updateTheatreByID(params, theatreID) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.findByIdAndUpdate(
-      params.theatreID,
-      { $et: params },
-      { new: true }
-    )
+    TheatreModel.findByIdAndUpdate(theatreID, { $set: params }, { new: true })
       .then(function(theatre) {
         if (!theatre) {
           return resolve({
@@ -76,9 +72,9 @@ export function updateTheatreByID(params) {
   });
 }
 
-export function deleteTheatreByID(params) {
+export function deleteTheatreByID(theatreID) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.findByIdAndRemove(params.theatreID)
+    TheatreModel.findByIdAndRemove(theatreID)
       .then(function(theatre) {
         resolve({
           data: theatre
