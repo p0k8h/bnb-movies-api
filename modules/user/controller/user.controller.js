@@ -15,9 +15,9 @@ export function signupUser(req, res, next) {
   let errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);
 
-  let userParams = _.pick(req.body, ["email", "password"]);
+  let params = _.pick(req.body, ["email", "password"]);
 
-  signupUser(userParams)
+  signupUser(params)
     .then(function(response) {
       res.send(response);
     })
@@ -27,14 +27,14 @@ export function signupUser(req, res, next) {
 }
 
 export function updateUser(req, res, next) {
-  let userParams = _.pick(req.body, [
+  let params = _.pick(req.body, [
     "first_name",
     "last_name",
     "phone",
     "address"
   ]);
 
-  updateUser(userParams)
+  updateUser(params)
     .then(function(response) {
       res.send(response);
     })
@@ -47,11 +47,11 @@ export function updateUser(req, res, next) {
 
   let userID = req.user._id;
 
-  let userParams = _.assign(_.pick(req.body, [
+  let params = _.assign(_.pick(req.body, [
 
   ]), { userID })
 
-  getUserByID(userParams)
+  getUserByID(params)
     .then(function(response) {
       res.send(response);
     })
