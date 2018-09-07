@@ -13,9 +13,11 @@ export function signupUser(params) {
         } else {
           let newUser = UserModel(params);
           newUser.save(function(err, user) {
+            console.log(err, user);
+            
             if (err) {
               return reject({
-                message: err
+                message: String(err)
               });
             } else {
               resolve({

@@ -1,9 +1,10 @@
 import mongoose from "mongoose";
+import bcrypt from "bcrypt-nodejs";
 
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const ShowSchema = new Schema({
+const UserSchema = new Schema({
   first_name: {
     type: String,
     required: true
@@ -31,7 +32,7 @@ const ShowSchema = new Schema({
     type: String
   },
   role: {
-    type: Boolean,
+    type: Number,
     enum: [1, 2],
     default: 2 // 1/2 - admin/client
   },
@@ -46,7 +47,7 @@ const ShowSchema = new Schema({
 /**
  * Password hash middleware.
  */
-userSchema.pre("save", function save(next) {
+UserSchema.pre("save", function save(next) {
   const user = this;
   if (!user.isModified("password")) {
     return next();
@@ -68,7 +69,7 @@ userSchema.pre("save", function save(next) {
 /**
  * Helper method for validating user's password.
  */
-userSchema.methods.verifyPassword = function verifyPassword(
+UserSchema.methods.verifyPassword = function verifyPassword(
   candidatePassword,
   cb
 ) {
@@ -77,4 +78,4 @@ userSchema.methods.verifyPassword = function verifyPassword(
   });
 };
 
-export default mongoose.model("Show", ShowSchema);
+export default mongoose.model("user", UserSchema);
