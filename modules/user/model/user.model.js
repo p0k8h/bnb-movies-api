@@ -4,7 +4,7 @@ import bcrypt from "bcrypt-nodejs";
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-const UserSchema = new Schema({
+const userSchema = new Schema({
   first_name: {
     type: String,
     required: true
@@ -21,8 +21,8 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
-    select: false
+    required: true
+    // select: false
   },
   phone: {
     type: Number,
@@ -47,7 +47,7 @@ const UserSchema = new Schema({
 /**
  * Password hash middleware.
  */
-UserSchema.pre("save", function save(next) {
+userSchema.pre("save", function save(next) {
   const user = this;
   if (!user.isModified("password")) {
     return next();
@@ -69,7 +69,7 @@ UserSchema.pre("save", function save(next) {
 /**
  * Helper method for validating user's password.
  */
-UserSchema.methods.verifyPassword = function verifyPassword(
+userSchema.methods.verifyPassword = function verifyPassword(
   candidatePassword,
   cb
 ) {
@@ -78,4 +78,4 @@ UserSchema.methods.verifyPassword = function verifyPassword(
   });
 };
 
-export default mongoose.model("user", UserSchema);
+export default mongoose.model("user", userSchema);
