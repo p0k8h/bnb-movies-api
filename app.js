@@ -16,17 +16,12 @@ app.use(cors());
 mongooseConfig(config);
 expressConfig(app, config, path, env);
 
-express.Router().get("/", (req, res) => {
-  res.json({
-    message: "Welcome to the bnb movies API"
-  });
-});
 routes(app);
 
 
 app.listen(app.get("port"), () => {
   console.log(
-    `%s  Serving APPI at http://${config.app.host}:%d in %s mode\n`,
+    `%s  Serving API at http://${config.app.host}:%d in %s mode\n`,
     chalk.green("✅"),
     app.get("port"),
     env

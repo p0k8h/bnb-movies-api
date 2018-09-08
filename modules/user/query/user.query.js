@@ -14,7 +14,7 @@ export function signupUser(params) {
           let newUser = UserModel(params);
           newUser.save(function(err, user) {
             console.log(err, user);
-            
+
             if (err) {
               return reject({
                 message: String(err)
@@ -87,7 +87,7 @@ export function updatePassword(user_id, passwords) {
         password: 1
       },
       function(err, user) {
-        if (err) res.send(err);
+        if (err) reject(err);
         if (!user) {
           reject({
             result: "User not found!"

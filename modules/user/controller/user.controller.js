@@ -9,7 +9,7 @@ import {
 } from "../query/user.query";
 
 export function signupUser(req, res, next) {
-  req.checkBody("email", "movie_name must be entered!").notEmpty();
+  req.checkBody("email", "email must be entered!").notEmpty();
   req.checkBody("password", "password must be inserted!").notEmpty();
   req.checkBody("first_name", "first_name must be inserted!").notEmpty();
   req.checkBody("last_name", "last_name must be inserted!").notEmpty();
@@ -53,7 +53,7 @@ export function updateUser(req, res, next) {
 }
 
 export function getUserByID(req, res, next) {
-  let userID = req.user._id;
+  let userID = req.params.userID;
 
   let params = _.assign(_.pick(req.body, []), { userID });
 
