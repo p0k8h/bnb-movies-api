@@ -21,7 +21,7 @@ const MovieSchema = new Schema({
     required: true
   },
   run_time: {
-    type: string,
+    type: String,
     required: true
   },
   director: {
