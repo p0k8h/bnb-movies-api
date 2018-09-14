@@ -7,11 +7,11 @@ export default (req, res, next) => {
   if (token) {
     try {
       let decoded = decodeToken(token);
-      req.user = decoded;
+      req.user = decoded.user
       UserModel.findById(req.user._id)
         .then(user => {
           if (user) {
-            if (!user.activeStatus)
+            if (!user.active_status)
               return res.status(401).json({
                 message:
                   "Authentication failed, Your account has been disabled! Contact Admin"
@@ -31,7 +31,7 @@ export default (req, res, next) => {
     }
   } else {
     res.status(401).json({
-      message: "No token provided!"
+      message: "UnAuthorized, No token provided!"
     });
   }
 };
