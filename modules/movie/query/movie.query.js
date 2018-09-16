@@ -17,23 +17,26 @@ export function getMovies(params) {
 }
 
 export function postMovie(params) {
-  let moviePoster = params.moviePoster;
-  return new Promise(function(resolve, reject) {
-    if (moviePoster) {
-      moviePoster.mv(`/images/${moviePoster}`)
-    }
-    let movie = new MovieModel(params);
+  let { moviePoster, file } = params;
 
-    movie.save(function(err, movie) {
-      if (err) {
-        return reject({
-          message: err
-        });
-      } else {
-        resolve({
-          data: movie
-        });
-      }
+  return new Promise(function(resolve, reject) {
+    let posterPath = `images/${moviePoster}`;
+    file.mv(posterPath, function(err) {
+      let movie = new MovieModel(
+        Object.assign(params, { poster_link: posterPath })
+      );
+
+      movie.save(function(err, movie) {
+        if (err) {
+          return reject({
+            message: err
+          });
+        } else {
+          resolve({
+            data: movie
+          });
+        }
+      });
     });
   });
 }

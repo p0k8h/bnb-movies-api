@@ -21,6 +21,7 @@ export function postMovie(req, res, next) {
   req.checkBody("name", "name must be entered.").notEmpty();
   req.checkBody("description", "description must be entered.").notEmpty();
 
+  let file = req.files["poster"];
   let moviePoster = req.files["poster"] ? req.files["poster"].name : null;
 
   req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
@@ -35,14 +36,11 @@ export function postMovie(req, res, next) {
     "release_date",
     "run_time",
     "director",
-    "trailer_link"
+    "trailer_link",
+    "cast"
   ]);
 
-  console.log("pp", params);
-
-  console.log("moviePoster", moviePoster);
-
-  postMovieQ(_.assign(params, { moviePoster }))
+  postMovieQ(_.assign(params, { moviePoster, file }))
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err));
 }
