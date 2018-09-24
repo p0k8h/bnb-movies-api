@@ -40,3 +40,21 @@ export function postMovie(params) {
     });
   });
 }
+
+export function putMovie(params) {
+  let { moviePoster, file, movieID } = params;
+
+  return new Promise(function(resolve, reject) {
+    let posterPath = `images/${moviePoster}`;
+    file.mv(posterPath, function(err) {
+
+      MovieModel.findByIdAndUpdate(
+        { _id: movieID },
+        Object.assign(params, { poster_link: posterPath }),
+        { new: true }
+      )
+        .then(movie => resolve({ data: movie }))
+        .catch(err => reject({ message: err }));
+    });
+  });
+}

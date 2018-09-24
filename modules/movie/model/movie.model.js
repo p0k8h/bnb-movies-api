@@ -43,6 +43,14 @@ const MovieSchema = new Schema({
   poster_link: {
     type: String,
     required: true
+  },
+  cinemas: {
+    type: Array,
+    default: []
+  },
+  shows: {
+    type: Array,
+    default: []
   }
 });
 

@@ -32,14 +32,15 @@ export function getcinemas(req, res, next) {
 }
 
 export function postcinema(req, res, next) {
-
   req.checkBody("name", "name must be inserted!").notEmpty();
   req.checkBody("address", "address must be inserted!").notEmpty();
+  req.checkBody("phone", "phone must be inserted!").notEmpty();
+  req.checkBody("seats", "seats must be inserted!").notEmpty();
 
   let errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);
 
-  let params = _.pick(req.body, ["name", "address"]);
+  let params = _.pick(req.body, ["name", "address", "phone", "seat"]);
 
   postcinemaQ(params)
     .then(function(response) {
@@ -53,7 +54,7 @@ export function postcinema(req, res, next) {
 export function updatecinemaByID(req, res, next) {
   let cinemaID = req.params.cinemaID;
 
-  let params = _.pick(req.body, ["cinema_name", "cinema_address"]);
+  let params = _.pick(req.body, ["name", "address", "phone", "seats"]);
 
   updatecinemaByIDQ(params, cinemaID)
     .then(function(response) {

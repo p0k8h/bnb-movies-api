@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getMovies, postMovie } from "./movie.controller";
+import { getMovies, postMovie, putMovie } from "./movie.controller";
 import authentication from "../../../middlewares/authentication";
 import authorization from "../../../middlewares/authorization";
 
@@ -8,5 +8,6 @@ const router = Router();
 
 router.get("/", getMovies)
 router.post("/", authentication, authorization, postMovie);
+router.put("/:movieID", authentication, authorization, putMovie);
 
 export default router;

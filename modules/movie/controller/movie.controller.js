@@ -1,8 +1,8 @@
-import _ from "lodash";
-import { pick as _pick } from "lodash";
+import { pick, assign } from "lodash";
 import {
   getMovies as getMoviesQ,
-  postMovie as postMovieQ
+  postMovie as postMovieQ,
+  putMovie as putMovieQ
 } from "../query/movie.query";
 
 export function getMovies(req, res) {
@@ -21,16 +21,17 @@ export function postMovie(req, res, next) {
   req.checkBody("name", "name must be entered.").notEmpty();
   req.checkBody("description", "description must be entered.").notEmpty();
   req.checkBody("cinemas", "cinemas must be entered!").notEmpty();
+  req.checkBody("shows", "shows must be inserted").notEmpty();
 
-  let file = req.files["poster"];
-  let moviePoster = req.files["poster"] ? req.files["poster"].name : null;
+  let file = req.files && req.files["poster"];
+  let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
 
   req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
 
   const errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);
 
-  const params = _pick(req.body, [
+  const params = pick(req.body, [
     "name",
     "description",
     "poster",
@@ -38,10 +39,47 @@ export function postMovie(req, res, next) {
     "run_time",
     "director",
     "trailer_link",
-    "cast"
+    "cast",
+    "cinemas",
+    "shows",
+    "price"
   ]);
 
-  postMovieQ(_.assign(params, { moviePoster, file }))
+  postMovieQ(assign(params, { moviePoster, file }))
+    .then(data => res.send(data))
+    .catch(err => res.status(500).send(err));
+}
+
+export function putMovie(req, res, next) {
+  req.checkBody("name", "name must be entered.").notEmpty();
+  req.checkBody("description", "description must be entered.").notEmpty();
+  req.checkBody("cinemas", "cinemas must be entered!").notEmpty();
+  req.checkBody("shows", "shows must be inserted").notEmpty();
+
+  let file = req.files && req.files["poster"];
+  let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
+
+  req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
+
+  const errors = req.validationErrors();
+  if (errors) return res.status(400).send(errors);
+
+  let movieID = req.params.movieID;
+  const params = pick(req.body, [
+    "name",
+    "description",
+    "poster",
+    "release_date",
+    "run_time",
+    "director",
+    "trailer_link",
+    "cast",
+    "cinemas",
+    "shows",
+    "price"
+  ]);
+
+  putMovieQ(assign(params, { moviePoster, file, movieID }))
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err));
 }

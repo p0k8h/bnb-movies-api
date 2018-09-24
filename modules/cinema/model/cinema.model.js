@@ -4,14 +4,21 @@ const Schema = mongoose.Schema;
 
 const cinemaSchema = new Schema({
   name: {
-    type: String
+    type: String,
+    required: true
   },
   address: {
-    type: String
+    type: String,
+    required: true
   },
   phone: {
-    type: Number
+    type: Number,
+    required: true
   },
+  seats: {
+    type: Number,
+    required: true
+  }
 });
 
 export default mongoose.model("cinema", cinemaSchema);
