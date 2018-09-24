@@ -16,6 +16,10 @@ const MovieSchema = new Schema({
     type: String,
     required: true
   },
+  price: {
+    type: String,
+    required: true
+  },
   release_date: {
     type: Date,
     required: true

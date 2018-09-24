@@ -18,7 +18,6 @@ expressConfig(app, config, path, env);
 
 routes(app);
 
-
 app.listen(app.get("port"), () => {
   console.log(
     `%s  Serving API at http://${config.app.host}:%d in %s mode\n`,

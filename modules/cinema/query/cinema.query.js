@@ -1,11 +1,11 @@
-import TheatreModel from "../model/theatre.model";
+import CinemaModel from "../model/cinema.model";
 
-export function getTheatres(params = {}) {
+export function getcinemas(params = {}) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.find(params)
-      .then(function(theatres) {
+    CinemaModel.find(params)
+      .then(function(cinemas) {
         resolve({
-          data: theatres
+          data: cinemas
         });
       })
       .catch(function(err) {
@@ -16,12 +16,12 @@ export function getTheatres(params = {}) {
   });
 }
 
-export function getTheatreByID(theatreID) {
+export function getcinemaByID(cinemaID) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.findById(theatreID)
-      .then(function(theatre) {
+    CinemaModel.findById(cinemaID)
+      .then(function(cinema) {
         resolve({
-          data: theatre
+          data: cinema
         });
       })
       .catch(function(err) {
@@ -32,35 +32,35 @@ export function getTheatreByID(theatreID) {
   });
 }
 
-export function postTheatre(params) {
+export function postcinema(params) {
   return new Promise(function(resolve, reject) {
-    let theatre = new TheatreModel(params);
+    let cinema = new CinemaModel(params);
 
-    theatre.save(function(err, theatre) {
+    cinema.save(function(err, cinema) {
       if (err) {
         return reject({
           message: err
         });
       } else {
         resolve({
-          data: theatre
+          data: cinema
         });
       }
     });
   });
 }
 
-export function updateTheatreByID(params, theatreID) {
+export function updatecinemaByID(params, cinemaID) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.findByIdAndUpdate(theatreID, { $set: params }, { new: true })
-      .then(function(theatre) {
-        if (!theatre) {
+    CinemaModel.findByIdAndUpdate(cinemaID, { $set: params }, { new: true })
+      .then(function(cinema) {
+        if (!cinema) {
           return resolve({
-            message: "Theatre not found!"
+            message: "cinema not found!"
           });
         } else {
           return resolve({
-            data: theatre
+            data: cinema
           });
         }
       })
@@ -72,12 +72,12 @@ export function updateTheatreByID(params, theatreID) {
   });
 }
 
-export function deleteTheatreByID(theatreID) {
+export function deletecinemaByID(cinemaID) {
   return new Promise(function(resolve, reject) {
-    TheatreModel.findByIdAndRemove(theatreID)
-      .then(function(theatre) {
+    CinemaModel.findByIdAndRemove(cinemaID)
+      .then(function(cinema) {
         resolve({
-          data: theatre
+          data: cinema
         });
       })
       .catch(function(err) {
