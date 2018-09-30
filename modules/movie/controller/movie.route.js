@@ -7,7 +7,8 @@ import authorization from "../../../middlewares/authorization";
 const router = Router();
 
 router.get("/", getMovies)
-router.post("/", authentication, authorization, postMovie);
+// router.post("/", authentication, authorization, postMovie);
+router.post("/", postMovie);
 router.put("/:movieID", authentication, authorization, putMovie);
 
 export default router;

@@ -5,11 +5,7 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const userSchema = new Schema({
-  first_name: {
-    type: String,
-    required: true
-  },
-  last_name: {
+  name: {
     type: String,
     required: true
   },

@@ -11,8 +11,7 @@ import {
 export function signupUser(req, res, next) {
   req.checkBody("email", "email must be entered!").notEmpty();
   req.checkBody("password", "password must be inserted!").notEmpty();
-  req.checkBody("first_name", "first_name must be inserted!").notEmpty();
-  req.checkBody("last_name", "last_name must be inserted!").notEmpty();
+  req.checkBody("name", "name must be inserted!").notEmpty();
   req.checkBody("phone", "phone must be inserted!").notEmpty();
 
   let errors = req.validationErrors();
@@ -21,8 +20,7 @@ export function signupUser(req, res, next) {
   let params = _.pick(req.body, [
     "email",
     "password",
-    "first_name",
-    "last_name",
+    "name",
     "phone"
   ]);
 
@@ -37,8 +35,7 @@ export function signupUser(req, res, next) {
 
 export function updateUser(req, res, next) {
   let params = _.pick(req.body, [
-    "first_name",
-    "last_name",
+    "name",
     "phone",
     "address"
   ]);

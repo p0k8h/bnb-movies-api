@@ -5,7 +5,7 @@ import authentication from "../../../middlewares/authentication";
 
 const router = Router();
 
-router.post("/", signupUser);
+router.post("/signup", signupUser);
 router.get("/:userID", getUserByID);
 router.put("/", authentication, updateUser);
 
