@@ -12,6 +12,7 @@ const env = process.env.NODE_ENV || "dev";
 
 const app = express();
 app.use(cors());
+app.use("/public", express.static(__dirname + '/public'));
 
 mongooseConfig(config);
 expressConfig(app, config, path, env);

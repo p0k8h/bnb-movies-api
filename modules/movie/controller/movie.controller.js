@@ -6,7 +6,7 @@ import {
 } from "../query/movie.query";
 
 export function getMovies(req, res) {
-  let params = _.pick(req.body, []);
+  let params = pick(req.body, []);
 
   getMoviesQ(params)
     .then(function(response) {
@@ -24,9 +24,12 @@ export function postMovie(req, res, next) {
   req.checkBody("shows", "shows must be inserted").notEmpty();
 
   let file = req.files && req.files["poster"];
+  console.log('file', file)
   let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
-
-  req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
+  if (!moviePoster) {
+    return res.status(400).send({"poster": "Please enter a movie poster"})
+  }
+  // req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
 
   const errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);

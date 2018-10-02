@@ -45,7 +45,7 @@ export function putMovie(params) {
   let { moviePoster, file, movieID } = params;
 
   return new Promise(function(resolve, reject) {
-    let posterPath = `images/${moviePoster}`;
+    let posterPath = `public/${moviePoster}`;
     file.mv(posterPath, function(err) {
 
       MovieModel.findByIdAndUpdate(
