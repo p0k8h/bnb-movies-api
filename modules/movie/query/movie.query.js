@@ -1,4 +1,6 @@
+import express from 'express'
 import MovieModel from "../model/movie.model";
+const app = express();
 
 export function getMovies(params) {
   return new Promise(function(resolve, reject) {
@@ -20,10 +22,10 @@ export function postMovie(params) {
   let { moviePoster, file } = params;
 
   return new Promise(function(resolve, reject) {
-    let posterPath = `images/${moviePoster}`;
+    let posterPath = `public/${moviePoster}`;
     file.mv(posterPath, function(err) {
       let movie = new MovieModel(
-        Object.assign(params, { poster_link: posterPath })
+        Object.assign(params, { poster_link: `http://localhost:3001/${posterPath}` })
       );
 
       movie.save(function(err, movie) {
