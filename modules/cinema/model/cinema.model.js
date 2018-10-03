@@ -18,7 +18,11 @@ const cinemaSchema = new Schema({
   seats: {
     type: Number,
     required: true
-  }
+  },
+  poster_link: {
+    type: String,
+    required: true
+  },
 });
 
 export default mongoose.model("cinema", cinemaSchema);

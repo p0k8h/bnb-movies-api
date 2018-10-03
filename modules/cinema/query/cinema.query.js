@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import CinemaModel from "../model/cinema.model";
 
 export function getcinemas(params = {}) {
@@ -33,19 +34,26 @@ export function getcinemaByID(cinemaID) {
 }
 
 export function postcinema(params) {
-  return new Promise(function(resolve, reject) {
-    let cinema = new CinemaModel(params);
+  let { cinemaPoster, file } = params;
 
-    cinema.save(function(err, cinema) {
-      if (err) {
-        return reject({
-          message: err
-        });
-      } else {
-        resolve({
-          data: cinema
-        });
-      }
+  return new Promise(function(resolve, reject) {
+    let posterPath = `public/${shortid.generate()}${cinemaPoster}`;
+    file.mv(posterPath, function(err) {
+      let cinema = new CinemaModel(
+        Object.assign(params, { poster_link: `http://localhost:3001/${posterPath}` })
+      );
+
+      cinema.save(function(err, cinema) {
+        if (err) {
+          return reject({
+            message: err
+          });
+        } else {
+          resolve({
+            data: cinema
+          });
+        }
+      });
     });
   });
 }

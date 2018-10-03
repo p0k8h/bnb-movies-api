@@ -1,4 +1,4 @@
-import _ from "lodash";
+import {assign, pick} from "lodash";
 import {
   getcinemas as getcinemasQ,
   postcinema as postcinemaQ,
@@ -20,7 +20,7 @@ export function getcinemaByID(req, res, next) {
 }
 
 export function getcinemas(req, res, next) {
-  let params = _.pick(req.body, []);
+  let params = pick(req.body, []);
 
   getcinemasQ(params)
     .then(function(response) {
@@ -40,9 +40,12 @@ export function postcinema(req, res, next) {
   let errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);
 
-  let params = _.pick(req.body, ["name", "address", "phone", "seat"]);
+  let file = req.files && req.files["poster"];
+  let cinemaPoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
 
-  postcinemaQ(params)
+  let params = pick(req.body, ["name", "address", "phone", "seats", "poster"]);
+
+  postcinemaQ(assign(params, {cinemaPoster, file}))
     .then(function(response) {
       res.send(response);
     })
@@ -54,7 +57,7 @@ export function postcinema(req, res, next) {
 export function updatecinemaByID(req, res, next) {
   let cinemaID = req.params.cinemaID;
 
-  let params = _.pick(req.body, ["name", "address", "phone", "seats"]);
+  let params = pick(req.body, ["name", "address", "phone", "seats"]);
 
   updatecinemaByIDQ(params, cinemaID)
     .then(function(response) {
