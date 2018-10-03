@@ -24,7 +24,6 @@ export function postMovie(req, res, next) {
   req.checkBody("shows", "shows must be inserted").notEmpty();
 
   let file = req.files && req.files["poster"];
-  console.log('file', file)
   let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
   if (!moviePoster) {
     return res.status(400).send({"poster": "Please enter a movie poster"})
