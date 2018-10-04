@@ -15,13 +15,18 @@ export function login(params) {
           });
         } else {
           user.verifyPassword(password, function(err, isMatch) {
-            if (err) {
+            if (err)
+              return reject({
+                message: err
+              });
+
+            if (isMatch) {
+              let token = generateToken(user);
+              return resolve({ user, token });
+            } else {
               return reject({
                 message: "Authentication failed. Wrong password!"
               });
-            } else {
-              let token = generateToken(user);
-              return resolve({ user, token });
             }
           });
         }

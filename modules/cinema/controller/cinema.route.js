@@ -15,7 +15,7 @@ const router = Router();
 router.get("/", getcinemas);
 router.get("/:cinemaID", getcinemaByID);
 router.post("/", postcinema);
-router.put("/:cinemaID", authentication, authorization, updatecinemaByID);
-router.delete("/:cinemaID", authentication, authorization, deletecinemaByID);
+router.put("/:cinemaID", updatecinemaByID);
+router.delete("/:cinemaID", deletecinemaByID);
 
 export default router;

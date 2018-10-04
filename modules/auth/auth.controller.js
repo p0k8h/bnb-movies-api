@@ -1,4 +1,4 @@
-import _ from "lodash";
+import { pick } from "lodash";
 
 import { login as loginQ } from "./auth.query";
 
@@ -9,7 +9,7 @@ export function login(req, res, next) {
   let errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);
 
-  let params = _.pick(req.body, ["email", "password"]);
+  let params = pick(req.body, ["email", "password"]);
 
   loginQ(params)
     .then(function(response) {
