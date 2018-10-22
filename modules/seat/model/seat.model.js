@@ -7,6 +7,9 @@ const SeatSchema = new Schema({
   seat_no: {
     type: String
   },
+  movieID: {
+    type: ObjectId
+  },
   seat_status: {
     type: String,
     enum: ["Booked", "Available"]

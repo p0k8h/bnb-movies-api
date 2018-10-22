@@ -32,6 +32,13 @@ const userSchema = new Schema({
     enum: [1, 2],
     default: 2 // 1/2 - admin/client
   },
+  dob: {
+    type: String
+  },
+  gender: {
+    type: String,
+    enum: ["male", "female"]
+  },
   active_status: {
     type: Boolean,
     default: true

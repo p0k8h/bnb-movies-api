@@ -7,6 +7,9 @@ const showSchema = new Schema({
   show_time: {
     type: Date
   },
+  show_date: {
+    type: Date
+  }
 });
 
 export default mongoose.model("show", showSchema);

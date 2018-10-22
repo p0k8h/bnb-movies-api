@@ -21,7 +21,9 @@ export function signupUser(req, res, next) {
     "email",
     "password",
     "name",
-    "phone"
+    "phone",
+    "dob",
+    "gender"
   ]);
 
   signupUserQ(params)
@@ -37,7 +39,9 @@ export function updateUser(req, res, next) {
   let params = _.pick(req.body, [
     "name",
     "phone",
-    "address"
+    "address",
+    "dob",
+    "gender"
   ]);
 
   updateUserQ(params)
