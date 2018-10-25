@@ -2,7 +2,8 @@ import { pick, assign } from "lodash";
 import {
   getMovies as getMoviesQ,
   postMovie as postMovieQ,
-  putMovie as putMovieQ
+  putMovie as putMovieQ,
+  deleteMovieByID as deleteMovieByIDQ
 } from "../query/movie.query";
 
 export function getMovies(req, res) {
@@ -84,4 +85,16 @@ export function putMovie(req, res, next) {
   putMovieQ(assign(params, { moviePoster, file, movieID }))
     .then(data => res.send(data))
     .catch(err => res.status(500).send(err));
+}
+
+export function deleteMovieByID(req, res, next) {
+  let movieID = req.params.movieID;
+
+  deleteMovieByIDQ(movieID)
+    .then(function(response) {
+      res.send(response);
+    })
+    .catch(function(err) {
+      res.status(400).send(err);
+    });
 }

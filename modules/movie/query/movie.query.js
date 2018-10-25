@@ -1,4 +1,4 @@
-import shortid from 'shortid';
+import shortid from "shortid";
 import MovieModel from "../model/movie.model";
 
 export function getMovies(params) {
@@ -24,7 +24,9 @@ export function postMovie(params) {
     let posterPath = `public/${shortid.generate()}${moviePoster}`;
     file.mv(posterPath, function(err) {
       let movie = new MovieModel(
-        Object.assign(params, { poster_link: `http://localhost:3001/${posterPath}` })
+        Object.assign(params, {
+          poster_link: `http://localhost:3001/${posterPath}`
+        })
       );
 
       movie.save(function(err, movie) {
@@ -48,7 +50,6 @@ export function putMovie(params) {
   return new Promise(function(resolve, reject) {
     let posterPath = `public/${moviePoster}`;
     file.mv(posterPath, function(err) {
-
       MovieModel.findByIdAndUpdate(
         { _id: movieID },
         Object.assign(params, { poster_link: posterPath }),
@@ -57,5 +58,21 @@ export function putMovie(params) {
         .then(movie => resolve({ data: movie }))
         .catch(err => reject({ message: err }));
     });
+  });
+}
+
+export function deleteMovieByID(movieID) {
+  return new Promise(function(resolve, reject) {
+    MovieModel.findByIdAndRemove(movieID)
+      .then(function(movie) {
+        resolve({
+          data: movie
+        });
+      })
+      .catch(function(err) {
+        reject({
+          message: err
+        });
+      });
   });
 }

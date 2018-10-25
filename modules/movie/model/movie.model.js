@@ -21,7 +21,7 @@ const MovieSchema = new Schema({
     required: true
   },
   release_date: {
-    type: Date,
+    type: String,
     required: true
   },
   run_time: {
