@@ -4,16 +4,16 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 const SeatSchema = new Schema({
-  seat_no: {
-    type: String
-  },
   movieID: {
     type: ObjectId
   },
-  seat_status: {
-    type: String,
-    enum: ["Booked", "Available"]
-  }
+  cinemaID: {
+    type: ObjectId
+  },
+  show_time: {
+    type: String
+  },
+  selectedSeats: [Array]
 });
 
 export default mongoose.model("Seat", SeatSchema);

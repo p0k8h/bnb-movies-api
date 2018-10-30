@@ -15,10 +15,6 @@ const cinemaSchema = new Schema({
     type: Number,
     required: true
   },
-  seats: {
-    type: Number,
-    required: true
-  },
   poster_link: {
     type: String,
     required: true

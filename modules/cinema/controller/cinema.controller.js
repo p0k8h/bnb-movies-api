@@ -35,7 +35,6 @@ export function postcinema(req, res, next) {
   req.checkBody("name", "name must be inserted!").notEmpty();
   req.checkBody("address", "address must be inserted!").notEmpty();
   req.checkBody("phone", "phone must be inserted!").notEmpty();
-  req.checkBody("seats", "seats must be inserted!").notEmpty();
 
   let errors = req.validationErrors();
   if (errors) return res.status(400).send(errors);
@@ -43,7 +42,7 @@ export function postcinema(req, res, next) {
   let file = req.files && req.files["poster"];
   let cinemaPoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
 
-  let params = pick(req.body, ["name", "address", "phone", "seats", "poster"]);
+  let params = pick(req.body, ["name", "address", "phone", "poster"]);
 
   postcinemaQ(assign(params, {cinemaPoster, file}))
     .then(function(response) {

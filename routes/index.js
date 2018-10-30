@@ -2,6 +2,7 @@ import userRoutes from "../modules/user/controller/user.route";
 import cinemaRoutes from "../modules/cinema/controller/cinema.route";
 // import bookingRoutes from '../modules/booking/controller/booking.route'
 import movieRoutes from "../modules/movie/controller/movie.route";
+import seatRoutes from "../modules/seat/controller/seat.route";
 
 import authRoutes from "../modules/auth/auth.route";
 
@@ -14,5 +15,6 @@ export default function(app) {
   app.use(`${BASE_URL}/cinemas`, cinemaRoutes);
   // app.use(`${BASE_URL}/bookings`, bookingRoutes);
   app.use(`${BASE_URL}/movies`, movieRoutes);
+  app.use(`${BASE_URL}/seats`, seatRoutes);
   app.use(`${BASE_URL}/auth`, authRoutes);
 }
