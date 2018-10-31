@@ -2,6 +2,8 @@ import shortid from "shortid";
 import SeatModel from "../model/seat.model";
 
 export function getSeats(params) {
+  // let { movieID, cinemaID, show_time } = params;
+  console.log(',.,', params)
   return new Promise(function(resolve, reject) {
     SeatModel.find(params)
       .then(function(seats) {
@@ -18,15 +20,22 @@ export function getSeats(params) {
 }
 
 export function postSeat(params) {
+  let { movieID, cinemaID, selectedSeats, show_time } = params;
   return new Promise(function(resolve, reject) {
+    let query = { movieID, cinemaID, show_time };
+    let update = { selectedSeats };
+    let options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-    SeatModel.update(
-      { movieID: params.movieID, cinemaID: params.movieID },
-      { $addToSet: { selectedSeats: [...params.selectedSeats] }, show_time },
-      { upsert: true, setDefaultsOnInsert: true },
-      function(err, data) {
-        console.log("=-=-=", err, data);
-      }
-    );
+    SeatModel.findOneAndUpdate(query, { $addToSet: update }, options)
+      .then(function(data) {
+        resolve({
+          data
+        });
+      })
+      .catch(function(err) {
+        reject({
+          message: err
+        });
+      });
   });
 }

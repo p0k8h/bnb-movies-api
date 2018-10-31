@@ -5,7 +5,7 @@ import {
 } from "../query/seat.query";
 
 export function getSeats(req, res) {
-  let params = pick(req.body, []);
+  let params = pick(req.body, ["movieID", "cinemaID", "show_time"]);
 
   getSeatsQ(params)
     .then(function(response) {
@@ -17,7 +17,6 @@ export function getSeats(req, res) {
 }
 
 export function postSeat(req, res) {
-    console.log('==-=-==-==--==', req.body)
   let params = pick(req.body, [
     "cinemaID",
     "movieID",
