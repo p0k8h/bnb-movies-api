@@ -73,8 +73,6 @@ export function putMovie(req, res, next) {
     "director",
     "trailer_link",
     "cast",
-    "cinemas",
-    "shows",
     "price"
   ]);
 
