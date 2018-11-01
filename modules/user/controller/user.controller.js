@@ -44,7 +44,7 @@ export function updateUser(req, res, next) {
     "gender"
   ]);
 
-  updateUserQ(params)
+  updateUserQ(req.params.userID, params)
     .then(function(response) {
       res.send(response);
     })

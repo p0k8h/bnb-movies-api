@@ -3,7 +3,6 @@ import SeatModel from "../model/seat.model";
 
 export function getSeats(params) {
   // let { movieID, cinemaID, show_time } = params;
-  console.log(',.,', params)
   return new Promise(function(resolve, reject) {
     SeatModel.find(params)
       .then(function(seats) {

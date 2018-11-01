@@ -7,6 +7,6 @@ const router = Router();
 
 router.post("/signup", signupUser);
 router.get("/:userID", getUserByID);
-router.put("/", authentication, updateUser);
+router.put("/:userID", updateUser);
 
 export default router;

@@ -56,12 +56,12 @@ export function getUserByID(params) {
   });
 }
 
-export function updateUser(params) {
+export function updateUser(userID, params) {
   return new Promise(function(resolve, reject) {
-    UserModel.findByIdAndUpdate(params._id, { $set: params }, { new: true })
+    UserModel.findByIdAndUpdate(userID, { $set: params }, { new: true })
       .then(function(user) {
         if (!user)
-          return resolve({
+          return reject({
             message: "User not found!"
           });
         return resolve({
