@@ -5,6 +5,7 @@ import {
 } from "../query/seat.query";
 
 export function getSeats(req, res) {
+
   let params = pick(req.body, ["movieID", "cinemaID", "show_time"]);
 
   getSeatsQ(params)

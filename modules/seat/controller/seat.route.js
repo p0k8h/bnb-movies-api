@@ -6,7 +6,7 @@ import authorization from "../../../middlewares/authorization";
 
 const router = Router();
 
-router.get("/", getSeats);
-router.post("/", postSeat);
+router.post("/", getSeats);
+router.post("/post", postSeat);
 
 export default router;

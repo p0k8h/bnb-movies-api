@@ -14,7 +14,7 @@ export function getMovies(req, res) {
       res.send(response);
     })
     .catch(function(err) {
-      re.status(400).send(err);
+      res.status(400).send(err);
     });
 }
 
