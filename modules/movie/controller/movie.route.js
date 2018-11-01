@@ -9,7 +9,7 @@ const router = Router();
 router.get("/", getMovies)
 // router.post("/", authentication, authorization, postMovie);
 router.post("/", postMovie);
-router.put("/:movieID", authentication, authorization, putMovie);
+router.put("/:movieID", putMovie);
 router.delete("/:movieID", deleteMovieByID);
 
 export default router;

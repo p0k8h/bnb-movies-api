@@ -52,7 +52,7 @@ export function putMovie(params) {
     file.mv(posterPath, function(err) {
       MovieModel.findByIdAndUpdate(
         { _id: movieID },
-        Object.assign(params, { poster_link: posterPath }),
+        Object.assign(params, { poster_link: `http://localhost:3001/${posterPath}` }),
         { new: true }
       )
         .then(movie => resolve({ data: movie }))
