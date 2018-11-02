@@ -19,6 +19,8 @@ export function getSeats(req, res) {
 
 export function postSeat(req, res) {
   let params = pick(req.body, [
+    "price",
+    "userID",
     "cinemaID",
     "movieID",
     "selectedSeats",

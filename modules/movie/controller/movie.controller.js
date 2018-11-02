@@ -21,8 +21,8 @@ export function getMovies(req, res) {
 export function postMovie(req, res, next) {
   req.checkBody("name", "name must be entered.").notEmpty();
   req.checkBody("description", "description must be entered.").notEmpty();
-  req.checkBody("cinemas", "cinemas must be entered!").notEmpty();
-  req.checkBody("shows", "shows must be inserted").notEmpty();
+  // req.checkBody("cinemas", "cinemas must be entered!").notEmpty();
+  // req.checkBody("shows", "shows must be inserted").notEmpty();
 
   let file = req.files && req.files["poster"];
   let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
