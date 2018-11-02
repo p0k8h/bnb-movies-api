@@ -5,6 +5,7 @@ import {
   putMovie as putMovieQ,
   deleteMovieByID as deleteMovieByIDQ
 } from "../query/movie.query";
+import CinemaModel from "../../cinema/model/cinema.model";
 
 export function getMovies(req, res) {
   let params = pick(req.body, []);
@@ -25,9 +26,10 @@ export function postMovie(req, res, next) {
   // req.checkBody("shows", "shows must be inserted").notEmpty();
 
   let file = req.files && req.files["poster"];
-  let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
+  let moviePoster =
+    req.files && req.files["poster"] ? req.files["poster"].name : null;
   if (!moviePoster) {
-    return res.status(400).send({"poster": "Please enter a movie poster"})
+    return res.status(400).send({ poster: "Please enter a movie poster" });
   }
   // req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
 
@@ -43,20 +45,31 @@ export function postMovie(req, res, next) {
     "director",
     "trailer_link",
     "cast",
-    "cinemas",
     "shows",
     "price"
   ]);
 
-  postMovieQ(assign(params, { moviePoster, file }))
-    .then(data => res.send(data))
+  CinemaModel.find()
+    .then(function(cinemas) {
+      let data = {};
+
+      cinemas.forEach(c => {
+        data[c._id] = ["9 AM", "12 PM", "3 PM", "6 PM"];
+      });
+
+      console.log
+
+      postMovieQ(assign(Object.assign({}, params, {cinemas: data}), { moviePoster, file }))
+        .then(data => res.send(data))
+        .catch(err => res.status(500).send(err));
+    })
     .catch(err => res.status(500).send(err));
 }
 
 export function putMovie(req, res, next) {
-
   let file = req.files && req.files["poster"];
-  let moviePoster = req.files && req.files["poster"] ? req.files["poster"].name : null;
+  let moviePoster =
+    req.files && req.files["poster"] ? req.files["poster"].name : null;
 
   req.checkBody("poster", "Movie poster must be entered!").isImage(moviePoster);
 
